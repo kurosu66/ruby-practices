@@ -14,32 +14,27 @@ class Game
   end
 
   def parse_marks(marks)
-    zeros_inserted_marks = insert_zero_after_x(marks)
+    mark_pairs = insert_zero_after_x(marks).each_slice(2).to_a
 
-    sliced_marks = []
-    zeros_inserted_marks.each_slice(2) do |s|
-      sliced_marks << s
-    end
-
-    framed_marks = []
-    sliced_marks.each do |s|
+    frames = []
+    mark_pairs.each do |s|
       if s == %w[X 0]
-        framed_marks << ["X"]
+        frames << ["X"]
       else
-        framed_marks << s
+        frames << s
       end
 
-      framed_marks[9].concat(framed_marks[10]) if framed_marks[10]
-      framed_marks.slice!(10)
+      concat_last_frame(frames)
     end
 
-    if framed_marks[9].length >= 4
-      framed_marks[9] = framed_marks[9].reject { |item| item == "0" }
-    end
-
-    framed_marks.map do |f|
+    frames.map do |f|
       Frame.new(f[0], f[1], f[2])
     end
+  end
+
+  def concat_last_frame(frames)
+    frames[9].concat(frames[10]) if frames[10]
+    frames.slice!(10)
   end
 
   def insert_zero_after_x(marks)
@@ -77,6 +72,3 @@ class Game
     total_score.sum
   end
 end
-
-game = Game.new('6,3,9,0,0,3,8,2,7,3,X,9,1,8,0,X,6,4,5') #139
-puts game.score
