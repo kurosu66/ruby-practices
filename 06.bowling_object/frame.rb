@@ -12,18 +12,18 @@ class Frame
   end
 
   def score
-    if third_shot.mark == nil
+    if third_shot.mark.nil?
       [first_shot.score, second_shot.score].sum
     else
       [first_shot.score, second_shot.score, third_shot.score].sum
     end
   end
 
-  def is_spare
+  def spare?
     [first_shot.score, second_shot.score].sum == 10 && first_shot.score <= 9
   end
 
-  def is_strike
+  def strike?
     first_shot.score == 10
   end
 end

@@ -4,7 +4,6 @@ require_relative 'frame'
 require 'debug'
 
 class Game
-
   def initialize(marks)
     @frames = parse_marks(marks)
   end
@@ -12,23 +11,21 @@ class Game
   def score
     total_score = []
     @frames.each_with_index do |frame, i|
-      if i == 9 && @frames[i] != nil
+      if i == 9 && !@frames[i].nil?
         total_score << @frames[i].score
         break
       end
 
-      if frame.is_strike
+      if frame.strike?
         total_score << @frames[i + 1].first_shot.score
-        if @frames[i + 1].second_shot.mark.nil? # ストライクの次の次の投球がストライクの場合
-          total_score << @frames[i + 2].first_shot.score
-        else
-          total_score << @frames[i + 1].second_shot.score
-        end
+        total_score << if @frames[i + 1].second_shot.mark.nil? # ストライクの次の次の投球がストライクの場合
+                         @frames[i + 2].first_shot.score
+                       else
+                         @frames[i + 1].second_shot.score
+                       end
       end
 
-      if frame.is_spare
-        total_score << @frames[i + 1].first_shot.score
-      end
+      total_score << @frames[i + 1].first_shot.score if frame.spare?
 
       total_score << frame.score
     end
@@ -42,11 +39,11 @@ class Game
 
     frames = []
     mark_pairs.each do |s|
-      if s == %w[X 0]
-        frames << ["X"]
-      else
-        frames << s
-      end
+      frames << if s == %w[X 0]
+                  ['X']
+                else
+                  s
+                end
 
       concat_last_frame(frames)
     end
