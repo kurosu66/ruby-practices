@@ -9,6 +9,34 @@ class Game
     @frames = parse_marks(marks)
   end
 
+  def score
+    total_score = []
+    @frames.each_with_index do |frame, i|
+      if i == 9 && @frames[i] != nil
+        total_score << @frames[i].score
+        break
+      end
+
+      if frame.is_strike
+        total_score << @frames[i + 1].first_shot.score
+        if @frames[i + 1].second_shot.mark.nil? # ストライクの次の次の投球がストライクの場合
+          total_score << @frames[i + 2].first_shot.score
+        else
+          total_score << @frames[i + 1].second_shot.score
+        end
+      end
+
+      if frame.is_spare
+        total_score << @frames[i + 1].first_shot.score
+      end
+
+      total_score << frame.score
+    end
+    total_score.sum
+  end
+
+  private
+
   def parse_marks(marks)
     mark_pairs = insert_zero_after_x(marks).each_slice(2).to_a
 
@@ -40,31 +68,5 @@ class Game
       zeros_inserted_marks << '0' if m == 'X'
     end
     zeros_inserted_marks
-  end
-
-  def score
-    total_score = []
-    @frames.each_with_index do |frame, i|
-      if i == 9 && @frames[i] != nil
-        total_score << @frames[i].score
-        break
-      end
-
-      if frame.is_strike
-        total_score << @frames[i + 1].first_shot.score
-        if @frames[i + 1].second_shot.mark.nil? # ストライクの次の次の投球がストライクの場合
-          total_score << @frames[i + 2].first_shot.score
-        else
-          total_score << @frames[i + 1].second_shot.score
-        end
-      end
-
-      if frame.is_spare
-        total_score << @frames[i + 1].first_shot.score
-      end
-
-      total_score << frame.score
-    end
-    total_score.sum
   end
 end
