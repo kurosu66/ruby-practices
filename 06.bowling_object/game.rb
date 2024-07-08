@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'frame'
-require 'debug'
 
 class Game
   def initialize(marks)
@@ -18,7 +17,7 @@ class Game
 
       if frame.strike?
         total_score << @frames[i + 1].first_shot.score
-        total_score << if @frames[i + 1].second_shot.mark.nil? # ストライクの次の次の投球がストライクの場合
+        total_score << if @frames[i + 1].second_shot.nil? # ストライクの次の次の投球がストライクの場合
                          @frames[i + 2].first_shot.score
                        else
                          @frames[i + 1].second_shot.score
