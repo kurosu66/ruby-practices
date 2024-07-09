@@ -2,6 +2,8 @@
 
 require_relative 'shot'
 
+MAX_PINS = 10
+
 class Frame
   attr_reader :first_shot, :second_shot, :third_shot
 
@@ -16,10 +18,10 @@ class Frame
   end
 
   def spare?
-    !strike? && score == 10
+    !strike? && score == MAX_PINS
   end
 
   def strike?
-    first_shot.score == 10
+    first_shot.score == MAX_PINS
   end
 end
