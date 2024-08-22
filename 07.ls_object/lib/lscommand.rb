@@ -24,7 +24,7 @@ class LsCommand
     if params['a']
       current_dir_items = []
       Dir.foreach('.') {|v| current_dir_items << v }
-      current_dir_items.sort_by! { |i| File::basename(i) } # todo File::basenameを調べる
+      current_dir_items.sort!
     end
 
     if params['r']
