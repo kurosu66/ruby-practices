@@ -7,7 +7,7 @@ require_relative './format'
 
 
 
-require 'debug'
+require 'debug' # todo 後で消す
 
 
 
@@ -38,16 +38,5 @@ class LsCommand
     else
       format.format(current_dir_items, params)
     end
-
-    # current_dir_items = Dir.glob('*')
-    # result = Format.new(current_dir_items, params)
-
-    # if params.values.all? {|param| param == false }
-    # result.format_without_option
-
-    # elsif 他オプション
-    # end
-
-    # end
   end
 end
