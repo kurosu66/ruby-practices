@@ -6,7 +6,7 @@ require 'date'
 
 
 
-require 'debug'
+require 'debug' # todo 後で消す
 
 
 
@@ -76,7 +76,13 @@ class Format
         }
       end
 
-    display_l_option(total_block, files_l_option)
+    result = []
+    result << "total #{total_block}"
+
+    files_l_option.each do |v|
+      result << "#{v[:permission]}  #{v[:n_link]} #{v[:owner]}  #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}"
+    end
+    result
   end
 
   def format_permission(current_dir_item)
@@ -99,15 +105,5 @@ class Format
     else
       lstat.mtime.strftime('%_b %e %H:%M')
     end
-  end
-
-  def display_l_option(total_block, files_l_option)
-    result = []
-    result << "total #{total_block}"
-
-    files_l_option.each do |v|
-      result << "#{v[:permission]}  #{v[:n_link]} #{v[:owner]}  #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}"
-    end
-    result
   end
 end
