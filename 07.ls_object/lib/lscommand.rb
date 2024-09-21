@@ -2,6 +2,7 @@
 
 require 'optparse'
 require_relative './format'
+require_relative './fileinfo'
 
 
 
@@ -13,30 +14,34 @@ require 'debug' # todo 後で消す
 
 class LsCommand
   attr_reader :params
+  attr_reader :current_dir_items
 
   def initialize(params)
     @params = params
+    @current_dir_items = fetch_items
   end
 
-  def result
-    current_dir_items = Dir.glob('*')
+  def fetch_items
+    current_dir_items = []
 
     if params['a']
-      current_dir_items = []
       Dir.foreach('.') {|v| current_dir_items << v }
       current_dir_items.sort!
     end
 
+    if current_dir_items.empty?
+     current_dir_items = Dir.glob('*')
+    end
+
     if params['r']
-      current_dir_items = current_dir_items.reverse
+      current_dir_items.reverse!
     end
 
-    format = Format.new(params)
+    current_dir_items
+  end
 
-    if params['l']
-      format.format_l_option(current_dir_items)
-    else
-      format.format(current_dir_items, params)
-    end
+  def result
+    formatter = Format.new(@params)
+    @params['l'] ? formatter.format_l_option(@current_dir_items) : formatter.format(@current_dir_items)
   end
 end
