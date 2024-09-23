@@ -42,7 +42,7 @@ class Format
   end
 
   def format_l_option(directory_contents)
-
+    contents
   end
 
   private

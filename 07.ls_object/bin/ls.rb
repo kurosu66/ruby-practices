@@ -7,8 +7,12 @@ require_relative '../lib/directory_contents'
 params = ARGV.getopts('a', 'r', 'l')
 directory_contents = Directory_Contents.new(params)
 lscommand = Format.new(directory_contents, params)
-# lscommand = LsCommand.new(params)
-lscommand.result.each {|v| puts v.join}
+if params["l"]
+  puts lscommand.result["total_block"]
+  lscommand.result["files_l_option"].each {|v| puts "#{v[:permission]} #{v[:n_link]} #{v[:owner]} #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}"}
+else
+  lscommand.result.each {|v| puts v.join }
+end
 
 
 # クラス構成は以下にする

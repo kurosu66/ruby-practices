@@ -39,7 +39,7 @@ class Directory_Contents
               name: File.basename(current_dir_item)
             }
       end
-      l_option_contents
+      return l_option_contents
     end
     current_dir_items
   end
