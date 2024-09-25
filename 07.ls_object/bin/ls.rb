@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative '../lib/lscommand'
+require 'optparse'
+require 'etc'
+require 'date'
+require_relative '../lib/format'
 require_relative '../lib/directory_contents'
 
 params = ARGV.getopts('a', 'r', 'l')
@@ -13,13 +16,3 @@ if params["l"]
 else
   lscommand.result.each {|v| puts v.join }
 end
-
-
-# クラス構成は以下にする
-# 内容の取得クラス
-# 整形クラス（スペース入れたり、rjust、transpose等）
-
-# params = Argv.getopts('a',...)
-# contennts = Contents.new(params)
-# lscommand = display.new(contennts)
-# lscommand.run
