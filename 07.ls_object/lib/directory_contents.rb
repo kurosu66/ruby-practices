@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Directory_Contents
+class DirectoryContents
   COLUMN_COUNT = 7
   FIXED_SPACE_SIZE = 4
 

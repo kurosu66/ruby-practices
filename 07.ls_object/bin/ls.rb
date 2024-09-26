@@ -8,7 +8,7 @@ require_relative '../lib/format'
 require_relative '../lib/directory_contents'
 
 params = ARGV.getopts('a', 'r', 'l')
-directory_contents = Directory_Contents.new(params)
+directory_contents = DirectoryContents.new(params)
 lscommand = Format.new(directory_contents, params)
 if params["l"]
   puts lscommand.result["total_block"]
