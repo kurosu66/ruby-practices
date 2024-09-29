@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'debug'
+
 class DirectoryContents
   COLUMN_COUNT = 7
   FIXED_SPACE_SIZE = 4
@@ -33,20 +35,9 @@ class DirectoryContents
   end
 
   def fetch_contents
-    current_dir_items = []
+    current_dir_items = params['a'] ? Dir.entries('.') : Dir.glob('*')
 
-    if params['a']
-      Dir.foreach('.') {|v| current_dir_items << v }
-      current_dir_items.sort!
-    end
-
-    if current_dir_items.empty?
-      current_dir_items = Dir.glob('*')
-    end
-
-    if params['r']
-      current_dir_items.reverse!
-    end
+    current_dir_items.reverse! if params['r']
 
     if params['l']
       l_option_contents = {}
@@ -67,7 +58,6 @@ class DirectoryContents
     end
     current_dir_items
   end
-
 
   private
 
