@@ -10,7 +10,7 @@ class Format
   end
 
   def result
-    params['l'] ? format_l_option(directory_contents) : format(directory_contents)
+    params['l'] ? contents : format(directory_contents)
   end
 
   def format(directory_contents)
@@ -28,10 +28,6 @@ class Format
       items << c
     end
     items.transpose
-  end
-
-  def format_l_option(directory_contents)
-    contents
   end
 
   private
