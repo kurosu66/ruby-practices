@@ -33,7 +33,7 @@ class DirectoryContents
   end
 
   def fetch_contents
-    current_dir_items = params['a'] ? Dir.entries('.') : Dir.glob('*')
+    current_dir_items = params['a'] ? Dir.entries('.').sort : Dir.glob('*')
 
     current_dir_items.reverse! if params['r']
 
