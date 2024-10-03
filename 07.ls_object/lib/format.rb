@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'directory_contents'
 
 class Format
@@ -13,7 +14,7 @@ class Format
     params['l'] ? contents : format(directory_contents)
   end
 
-  def format(directory_contents)
+  def format(_directory_contents)
     contents << ' ' until (contents.length % DirectoryContents::COLUMN_COUNT).zero?
 
     max_length = contents.max_by(&:length).length
@@ -32,6 +33,7 @@ class Format
 
   private
 
-  def contents = @directory_contents.contents
-
+  def contents
+    @directory_contents.contents
+  end
 end
