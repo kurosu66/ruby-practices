@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DirectoryContents
-  COLUMN_COUNT = 7
+  COLUMN_COUNT = 3
   FIXED_SPACE_SIZE = 4
 
   PERMISSION = {
