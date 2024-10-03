@@ -11,7 +11,7 @@ class DirectoryContents
     3 => '-wx',
     4 => 'r--',
     5 => 'r-x',
-    6 => 'rx-',
+    6 => 'rw-',
     7 => 'rwx'
   }.freeze
 
