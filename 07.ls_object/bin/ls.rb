@@ -14,8 +14,9 @@ directory = Directory.new(params)
 file_info = FileInfo.new(params, directory)
 
 if params['l']
-  lscommand_long_option = Format_long_option.new(file_info, params)
-  lscommand_long_option.result.each { |v| puts "#{v[:permission]} #{v[:n_link]} #{v[:owner]} #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}" }
+  lscommand_long_option = FormatLongOption.new(file_info, params)
+  puts "total #{lscommand_long_option.result['total_block']}"
+  lscommand_long_option.result['files_l_option'].each { |v| puts "#{v[:permission]} #{v[:n_link]} #{v[:owner]} #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}" }
 else
   lscommand = Format.new(directory, params)
   lscommand.result(directory).each { |v| puts v.join }
