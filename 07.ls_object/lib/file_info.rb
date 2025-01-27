@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FileInfo 
+class FileInfo
   COLUMN_COUNT = 3
   FIXED_SPACE_SIZE = 4
 
@@ -35,28 +35,7 @@ class FileInfo
 
   def fetch_contents
     current_dir_items = @directory.contents
-
-    if params['l']
-      l_option_contents = {}
-      l_option_contents['total_block'] = current_dir_items.sum { |v| File.lstat(v).blocks }
-      l_option_contents['files_l_option'] = current_dir_items.map do |current_dir_item|
-        lstat = File.lstat(current_dir_item)
-        {
-          permission: fetch_permission_info(current_dir_item),
-          n_link: lstat.nlink.to_s.rjust(FIXED_SPACE_SIZE),
-          owner: Etc.getpwuid(lstat.uid).name,
-          group: Etc.getgrgid(lstat.gid).name,
-          size: File.lstat(current_dir_item).size.to_s.rjust(FIXED_SPACE_SIZE),
-          time_stamp: fetch_time_stamp(lstat),
-          name: File.basename(current_dir_item)
-        }
-      end
-      return l_option_contents
-    end
-    current_dir_items
   end
-
-  private
 
   def fetch_permission_info(current_dir_item)
     stat = File.lstat(current_dir_item)
