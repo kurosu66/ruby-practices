@@ -3,5 +3,6 @@ class Directory
 
   def initialize(params)
     @contents = params['a'] ? Dir.entries('.').sort : Dir.glob('*')
+    @contents.reverse! if params['r']
   end
 end

@@ -13,7 +13,6 @@ class Format
   def result(directory)
     contents = []
     contents += directory.contents
-    contents.reverse! if params['r']
     contents << ' ' until (contents.length % FileInfo::COLUMN_COUNT).zero?
 
     max_length = contents.max_by(&:length).length
