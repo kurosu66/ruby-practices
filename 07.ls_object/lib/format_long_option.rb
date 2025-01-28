@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 class FormatLongOption
-  attr_reader :result, :file_info
+  attr_reader :directory, :result, :file_info
 
-  def initialize(file_info, params)
+  def initialize(directory, file_info, params)
+    @directory = directory
     @file_info = file_info
     @params = params
     @result = result 
   end
 
   def result
-    current_dir_items = @file_info.contents
+    current_dir_items = directory.contents
 
     l_option_contents = {}
     l_option_contents['total_block'] = current_dir_items.sum { |v| File.lstat(v).blocks }

@@ -29,11 +29,6 @@ class FileInfo
 
   def initialize(params, directory)
     @directory = directory
-    @contents = fetch_contents
-  end
-
-  def fetch_contents
-    current_dir_items = @directory.contents
   end
 
   def fetch_permission_info(current_dir_item)
