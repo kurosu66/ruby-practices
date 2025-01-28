@@ -18,6 +18,6 @@ if params['l']
   puts "total #{lscommand_long_option.result['total_block']}"
   lscommand_long_option.result['files_l_option'].each { |v| puts "#{v[:permission]} #{v[:n_link]} #{v[:owner]} #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}" }
 else
-  lscommand = Format.new(directory, params)
+  lscommand = Format.new(directory)
   lscommand.result(directory).each { |v| puts v.join }
 end

@@ -25,10 +25,9 @@ class FileInfo
     'socket' => 's'
   }.freeze
 
-  attr_reader :params, :contents
+  attr_reader :contents
 
   def initialize(params, directory)
-    @params = params
     @directory = directory
     @contents = fetch_contents
   end

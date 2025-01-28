@@ -3,10 +3,9 @@
 require_relative 'directory_contents'
 
 class Format
-  attr_reader :directory, :params
+  attr_reader :directory
 
-  def initialize(directory, params)
-    @params = params
+  def initialize(directory)
     @result = result(directory)
   end
 
