@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'directory_contents'
-
 class Format
   attr_reader :directory
 
