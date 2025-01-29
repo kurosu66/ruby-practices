@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 class Format
-  attr_reader :directory
-
   def initialize(directory)
-    @result = result(directory)
+    @directory = directory
   end
 
   def result(directory)
     contents = []
-    contents += directory.contents
+    contents += @directory.contents
     contents << ' ' until (contents.length % FileInfo::COLUMN_COUNT).zero?
 
     max_length = contents.max_by(&:length).length

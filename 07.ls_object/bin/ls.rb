@@ -11,10 +11,10 @@ require_relative '../lib/format_long_option.rb'
 
 params = ARGV.getopts('a', 'r', 'l')
 directory = Directory.new(params)
-file_info = FileInfo.new(params, directory)
+file_info = FileInfo.new()
 
 if params['l']
-  lscommand_long_option = FormatLongOption.new(directory, file_info, params)
+  lscommand_long_option = FormatLongOption.new(directory, file_info)
   puts "total #{lscommand_long_option.result['total_block']}"
   lscommand_long_option.result['files_l_option'].each { |v| puts "#{v[:permission]} #{v[:n_link]} #{v[:owner]} #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}" }
 else

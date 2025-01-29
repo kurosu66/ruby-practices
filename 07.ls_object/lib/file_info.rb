@@ -25,12 +25,6 @@ class FileInfo
     'socket' => 's'
   }.freeze
 
-  attr_reader :contents
-
-  def initialize(params, directory)
-    @directory = directory
-  end
-
   def fetch_permission_info(current_dir_item)
     stat = File.lstat(current_dir_item)
     file_stat_mode = stat.mode.to_s(8)
