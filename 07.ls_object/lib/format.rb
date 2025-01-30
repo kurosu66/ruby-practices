@@ -5,7 +5,7 @@ class Format
     @directory = directory
   end
 
-  def result(directory)
+  def result(_directory)
     contents = []
     contents += @directory.contents
     contents << ' ' until (contents.length % FileInfo::COLUMN_COUNT).zero?

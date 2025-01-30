@@ -23,6 +23,6 @@ class FormatLongOption
         name: File.basename(current_dir_item)
       }
     end
-    return l_option_contents
+    l_option_contents
   end
 end
