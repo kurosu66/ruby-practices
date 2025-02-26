@@ -18,7 +18,7 @@ if command_line_option['l']
   result = ls_command_long_option.result(directory)
 
   puts "total #{ result[:total_block] }"
-  result[:files_l_option].each do |v|
+  result[:files_long_option].each do |v|
     puts "#{v[:permission]} #{v[:n_link]} #{v[:owner]} #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}"
   end
 else
