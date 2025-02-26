@@ -4,22 +4,23 @@
 require 'optparse'
 require 'etc'
 require 'date'
-require_relative '../lib/format'
 require_relative '../lib/directory'
-require_relative '../lib/file_info'
+require_relative '../lib/format'
 require_relative '../lib/format_long_option'
 
 params = ARGV.getopts('a', 'r', 'l')
 directory = Directory.new(params)
-file_info = FileInfo.new
 
 if params['l']
-  lscommand_long_option = FormatLongOption.new(directory, file_info)
-  puts "total #{lscommand_long_option.result['total_block']}"
-  lscommand_long_option.result['files_l_option'].each do |v|
+  ls_command_long_option = FormatLongOption.new()
+  result = ls_command_long_option.result(directory)
+
+  puts "total #{ result[:total_block] }"
+  result[:files_l_option].each do |v|
     puts "#{v[:permission]} #{v[:n_link]} #{v[:owner]} #{v[:group]} #{v[:size]} #{v[:time_stamp]} #{v[:name]}"
   end
 else
-  lscommand = Format.new(directory)
-  lscommand.result(directory).each { |v| puts v.join }
+  ls_command = Format.new()
+  result = ls_command.result(directory)
+  puts result.join
 end

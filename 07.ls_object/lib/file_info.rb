@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FileInfo
-  COLUMN_COUNT = 3
+  COLUMN_COUNT = 4
   FIXED_SPACE_SIZE = 4
 
   PERMISSION = {
@@ -25,8 +25,33 @@ class FileInfo
     'socket' => 's'
   }.freeze
 
-  def fetch_permission_info(current_dir_item)
-    stat = File.lstat(current_dir_item)
+  attr_reader :file
+
+  def initialize(file)
+    @file = file
+  end
+
+  def fetch_lstat_blocks(file)
+    File.lstat(file).blocks
+  end
+
+  def fetch_lstat
+    lstat = File.lstat(file)
+    {
+      permission: fetch_permission_info(file),
+      n_link: lstat.nlink.to_s.rjust(FileInfo::FIXED_SPACE_SIZE),
+      owner: Etc.getpwuid(lstat.uid).name,
+      group: Etc.getgrgid(lstat.gid).name,
+      size: lstat.size.to_s.rjust(FileInfo::FIXED_SPACE_SIZE),
+      time_stamp: fetch_time_stamp(lstat),
+      name: file
+    }
+  end
+
+  private
+
+  def fetch_permission_info(file)
+    stat = File.lstat(file)
     file_stat_mode = stat.mode.to_s(8)
 
     ftype = FILE_TYPE[stat.ftype]

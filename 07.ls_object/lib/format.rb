@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 class Format
-  def initialize(directory)
-    @directory = directory
-  end
-
-  def result(_directory)
-    contents = []
-    contents += @directory.contents
+  def result(directory)
+    contents = directory.file_info.map(&:file)
     contents << ' ' until (contents.length % FileInfo::COLUMN_COUNT).zero?
 
     max_length = contents.max_by(&:length).length
