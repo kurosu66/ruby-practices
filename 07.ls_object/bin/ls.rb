@@ -7,11 +7,13 @@ require 'date'
 require_relative '../lib/directory'
 require_relative '../lib/format'
 require_relative '../lib/format_long_option'
+require_relative '../lib/command_line_option'
 
-params = ARGV.getopts('a', 'r', 'l')
-directory = Directory.new(params)
 
-if params['l']
+command_line_option = CommandLineOption.new().params
+directory = Directory.new(command_line_option)
+
+if command_line_option['l']
   ls_command_long_option = FormatLongOption.new()
   result = ls_command_long_option.result(directory)
 
