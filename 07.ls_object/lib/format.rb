@@ -16,6 +16,6 @@ class Format
     items_with_spaces.each_slice(row) do |c|
       items << c
     end
-    items.transpose
+    puts items.transpose.join
   end
 end
