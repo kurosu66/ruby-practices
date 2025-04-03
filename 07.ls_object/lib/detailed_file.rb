@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FileInfo
+class DetailedFile 
   COLUMN_COUNT = 4
   FIXED_SPACE_SIZE = 4
 
