@@ -2,7 +2,7 @@
 
 class FormatLongOption
   def result(directory)
-    current_dir_items = directory.detailed_files
+    current_dir_items = directory.long_option_files
 
     long_option_contents = {}
     long_option_contents[:total_block] = current_dir_items.sum { |v| v.fetch_lstat_blocks(v.file) }

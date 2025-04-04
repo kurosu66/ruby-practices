@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DetailedFile 
+class LongOptionFile 
   COLUMN_COUNT = 4
   FIXED_SPACE_SIZE = 4
 
