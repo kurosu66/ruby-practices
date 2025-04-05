@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class LongOptionFile 
-  COLUMN_COUNT = 4
-  FIXED_SPACE_SIZE = 4
-
   PERMISSION = {
     0 => '---',
     1 => '--x',
