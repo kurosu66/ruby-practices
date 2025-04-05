@@ -29,10 +29,11 @@ class LongOptionFile
 
   def initialize(file)
     @file = file
+    @stat = File.lstat(file)
   end
 
   def fetch_lstat_blocks(file)
-    File.lstat(file).blocks
+    @stat.blocks
   end
 
   def fetch_lstat
@@ -51,10 +52,9 @@ class LongOptionFile
   private
 
   def fetch_permission_info(file)
-    stat = File.lstat(file)
     file_stat_mode = stat.mode.to_s(8)
 
-    ftype = FILE_TYPE[stat.ftype]
+    ftype = FILE_TYPE[@stat.ftype]
     permission_owner = PERMISSION[file_stat_mode[-3].to_i]
     permission_group = PERMISSION[file_stat_mode[-2].to_i]
     permission_user = PERMISSION[file_stat_mode[-1].to_i]
