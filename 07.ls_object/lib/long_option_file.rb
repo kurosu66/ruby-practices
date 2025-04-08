@@ -37,10 +37,10 @@ class LongOptionFile
     lstat = File.lstat(file)
     {
       permission: fetch_permission_info(file),
-      n_link: lstat.nlink.to_s.rjust(FileInfo::FIXED_SPACE_SIZE),
+      n_link: lstat.nlink.to_s.rjust(Format::FIXED_SPACE_SIZE),
       owner: Etc.getpwuid(lstat.uid).name,
       group: Etc.getgrgid(lstat.gid).name,
-      size: lstat.size.to_s.rjust(FileInfo::FIXED_SPACE_SIZE),
+      size: lstat.size.to_s.rjust(Format::FIXED_SPACE_SIZE),
       time_stamp: fetch_time_stamp(lstat),
       name: file
     }
@@ -49,7 +49,7 @@ class LongOptionFile
   private
 
   def fetch_permission_info(file)
-    file_stat_mode = stat.mode.to_s(8)
+    file_stat_mode = @stat.mode.to_s(8)
 
     ftype = FILE_TYPE[@stat.ftype]
     permission_owner = PERMISSION[file_stat_mode[-3].to_i]
