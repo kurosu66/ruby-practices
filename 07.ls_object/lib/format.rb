@@ -8,14 +8,12 @@ class Format
     contents = directory.long_option_files.map(&:file)
     adjust_to_column_count(contents)
     items_with_spaces = adjust_max_length(contents)
+    items = slice_items(contents, items_with_spaces)
 
-    items = []
-    row = (contents.length / COLUMN_COUNT).ceil
-    items_with_spaces.each_slice(row) do |c|
-      items << c
-    end
     puts items.transpose.join
   end
+
+  private
 
   def adjust_to_column_count(contents)
     contents << ' ' until (contents.length % COLUMN_COUNT).zero?
@@ -27,5 +25,10 @@ class Format
     contents.map do |v|
       v + ' ' * (adjusted_max_length - v.length)
     end
+  end
+
+  def slice_items(contents, items_with_spaces)
+    row = (contents.length / COLUMN_COUNT).ceil
+    items_with_spaces.each_slice(row).to_a
   end
 end

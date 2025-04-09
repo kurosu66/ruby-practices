@@ -33,7 +33,7 @@ class LongOptionFile
     @stat.blocks
   end
 
-  def fetch_lstat
+  def fetch_lstat #メソッド名修正する
     lstat = File.lstat(file)
     {
       permission: fetch_permission_info(file),
