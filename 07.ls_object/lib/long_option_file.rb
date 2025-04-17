@@ -22,33 +22,18 @@ class LongOptionFile
     'socket' => 's'
   }.freeze
 
-  attr_reader :file
+  attr_reader :file, :stat
 
   def initialize(file)
     @file = file
     @stat = File.lstat(file)
   end
 
-  def fetch_lstat_blocks(file)
+  def lstat_blocks
     @stat.blocks
   end
 
-  def fetch_lstat #メソッド名修正する
-    lstat = File.lstat(file)
-    {
-      permission: fetch_permission_info(file),
-      n_link: lstat.nlink.to_s.rjust(Format::FIXED_SPACE_SIZE),
-      owner: Etc.getpwuid(lstat.uid).name,
-      group: Etc.getgrgid(lstat.gid).name,
-      size: lstat.size.to_s.rjust(Format::FIXED_SPACE_SIZE),
-      time_stamp: fetch_time_stamp(lstat),
-      name: file
-    }
-  end
-
-  private
-
-  def fetch_permission_info(file)
+  def permission
     file_stat_mode = @stat.mode.to_s(8)
 
     ftype = FILE_TYPE[@stat.ftype]
@@ -59,13 +44,13 @@ class LongOptionFile
     "#{ftype}#{permission_owner}#{permission_group}#{permission_user}"
   end
 
-  def fetch_time_stamp(lstat)
+  def time_stamp
     half_year_ago = Date.today.prev_month(6).to_time
 
-    if lstat.mtime < half_year_ago
-      lstat.mtime.strftime('%_b %e %_5Y')
+    if @stat.mtime < half_year_ago
+      @stat.mtime.strftime('%_b %e %_5Y')
     else
-      lstat.mtime.strftime('%_b %e %H:%M')
+      @stat.mtime.strftime('%_b %e %H:%M')
     end
   end
 end
