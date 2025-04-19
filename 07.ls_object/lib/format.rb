@@ -5,7 +5,7 @@ class Format
   FIXED_SPACE_SIZE = 4
 
   def result(directory)
-    contents = directory.long_option_files.map(&:file)
+    contents = directory.file_details.map(&:file)
     adjust_to_column_count(contents)
     items_with_spaces = adjust_max_length(contents)
     items = slice_items(contents, items_with_spaces)

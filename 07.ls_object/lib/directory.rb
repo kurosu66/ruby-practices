@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'long_option_file'
+require_relative 'file_detail'
 
 class Directory
-  attr_reader :long_option_files
+  attr_reader :file_details
 
   def initialize(command_line_option)
-    @long_option_files = fetch_file_info(command_line_option)
+    @file_details = fetch_file_info(command_line_option)
   end
 
   private
@@ -14,6 +14,6 @@ class Directory
   def fetch_file_info(command_line_option)
     files = command_line_option['a'] ? Dir.entries('.').sort : Dir.glob('*')
     files = files.reverse if command_line_option['r']
-    files.map { |file| LongOptionFile.new(file) }
+    files.map { |file| FileDetail.new(file) }
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class LongOptionFile 
+class FileDetail 
   PERMISSION = {
     0 => '---',
     1 => '--x',

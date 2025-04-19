@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative '../lib/long_option_file'
+require_relative '../lib/file_detail'
 
 class FormatLongOption
   def result(directory)
-    current_dir_items = directory.long_option_files
+    current_dir_items = directory.file_details
     long_option_contents = {}
     build_long_option_contents(current_dir_items, long_option_contents)
 
