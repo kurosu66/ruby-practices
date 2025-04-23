@@ -22,11 +22,45 @@ class FileDetail
     'socket' => 's'
   }.freeze
 
-  attr_reader :file, :stat
+  attr_reader :file
 
   def initialize(file)
     @file = file
     @stat = File.lstat(file)
+  end
+
+  def self.calculate_total_blocks(current_dir_items)
+    current_dir_items.sum(&:lstat_blocks)
+  end
+
+  def self.build_file_info_list(current_dir_items)
+    current_dir_items.map do |current_dir_item|
+      {
+        permission: current_dir_item.permission,
+        n_link: current_dir_item.nlink.to_s.rjust(Format::FIXED_SPACE_SIZE),
+        owner: current_dir_item.owner,
+        group: current_dir_item.group,
+        size: current_dir_item.size.to_s.rjust(Format::FIXED_SPACE_SIZE),
+        time_stamp: current_dir_item.time_stamp,
+        name: current_dir_item.file
+      }
+    end
+  end
+  
+  def nlink
+    @stat.nlink
+  end
+
+  def owner
+    Etc.getpwuid(@stat.uid).name
+  end
+
+  def group
+    Etc.getgrgid(@stat.gid).name
+  end
+
+  def size
+    @stat.size
   end
 
   def lstat_blocks

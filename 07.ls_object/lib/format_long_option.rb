@@ -14,28 +14,9 @@ class FormatLongOption
 
   def build_long_option_contents(current_dir_items)
     long_option_contents = {}
-    long_option_contents[:total_block] = calculate_total_blocks(current_dir_items)
-    long_option_contents[:files_long_option] = build_file_info_list(current_dir_items)
+    long_option_contents[:total_block] = FileDetail.calculate_total_blocks(current_dir_items)
+    long_option_contents[:files_long_option] = FileDetail.build_file_info_list(current_dir_items)
     long_option_contents
-  end
-
-  def calculate_total_blocks(current_dir_items)
-    current_dir_items.sum(&:lstat_blocks)
-  end
-
-  def build_file_info_list(current_dir_items)
-    current_dir_items.map do |current_dir_item|
-      lstat = current_dir_item.stat
-      {
-        permission: current_dir_item.permission,
-        n_link: lstat.nlink.to_s.rjust(Format::FIXED_SPACE_SIZE),
-        owner: Etc.getpwuid(lstat.uid).name,
-        group: Etc.getgrgid(lstat.gid).name,
-        size: lstat.size.to_s.rjust(Format::FIXED_SPACE_SIZE),
-        time_stamp: current_dir_item.time_stamp,
-        name: current_dir_item.file
-      }
-    end
   end
 
   def output(long_option_contents)
