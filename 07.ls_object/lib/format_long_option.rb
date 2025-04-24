@@ -5,7 +5,6 @@ require_relative '../lib/file_detail'
 class FormatLongOption
   def result(directory)
     current_dir_items = directory.file_details
-    long_option_contents = {}
     long_option_contents = build_long_option_contents(current_dir_items)
     output(long_option_contents)
   end

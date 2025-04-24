@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FileDetail 
+class FileDetail
   PERMISSION = {
     0 => '---',
     1 => '--x',
