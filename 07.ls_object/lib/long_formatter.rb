@@ -2,7 +2,7 @@
 
 require_relative '../lib/file_detail'
 
-class FormatLongOption
+class LongFormatter 
   def result(directory)
     current_dir_items = directory.file_details
     long_option_contents = build_long_option_contents(current_dir_items)
@@ -22,10 +22,10 @@ class FormatLongOption
     current_dir_items.map do |current_dir_item|
       {
         permission: current_dir_item.permission,
-        n_link: current_dir_item.nlink.to_s.rjust(Format::FIXED_SPACE_SIZE),
+        n_link: current_dir_item.nlink.to_s.rjust(ShortFormatter::FIXED_SPACE_SIZE),
         owner: current_dir_item.owner,
         group: current_dir_item.group,
-        size: current_dir_item.size.to_s.rjust(Format::FIXED_SPACE_SIZE),
+        size: current_dir_item.size.to_s.rjust(ShortFormatter::FIXED_SPACE_SIZE),
         time_stamp: current_dir_item.time_stamp,
         name: current_dir_item.file
       }

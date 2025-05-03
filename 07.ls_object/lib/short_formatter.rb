@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Format
+class ShortFormatter
   COLUMN_COUNT = 4
   FIXED_SPACE_SIZE = 4
 
