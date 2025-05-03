@@ -11,10 +11,5 @@ require_relative '../lib/long_formatter'
 command_line_option = ARGV.getopts('a', 'r', 'l')
 directory = Directory.new(command_line_option)
 
-lscommand = nil
-if command_line_option['l']
-  lscommand = LongFormatter.new
-else
-  lscommand = ShortFormatter.new
-end
+lscommand = command_line_option['l'] ? LongFormatter.new : ShortFormatter.new
 lscommand.result(directory)
