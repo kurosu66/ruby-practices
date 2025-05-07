@@ -5,7 +5,7 @@ class ShortFormatter
   FIXED_SPACE_SIZE = 4
 
   def result(directory)
-    contents = directory.file_details.map(&:file)
+    contents = directory.file_details.map(&:file_name)
     adjust_to_column_count(contents)
     items_with_spaces = directory.adjust_max_length(contents)
     items = slice_items(contents, items_with_spaces)

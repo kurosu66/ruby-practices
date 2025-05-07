@@ -22,11 +22,11 @@ class FileDetail
     'socket' => 's'
   }.freeze
 
-  attr_reader :file
+  attr_reader :file_name
 
-  def initialize(file)
-    @file = file
-    @stat = File.lstat(file)
+  def initialize(file_name)
+    @file_name = file_name
+    @stat = File.lstat(file_name)
   end
 
   def self.calculate_total_blocks(current_dir_items)

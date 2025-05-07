@@ -20,8 +20,8 @@ class Directory
   private
 
   def fetch_file_details(command_line_option)
-    files = command_line_option['a'] ? Dir.entries('.').sort : Dir.glob('*')
-    files = files.reverse if command_line_option['r']
-    files.map { |file| FileDetail.new(file) }
+    file_names = command_line_option['a'] ? Dir.entries('.').sort : Dir.glob('*')
+    file_names = files.reverse if command_line_option['r']
+    file_names.map { |file_name| FileDetail.new(file_name) }
   end
 end

@@ -27,7 +27,7 @@ class LongFormatter
         group: current_dir_item.group,
         size: current_dir_item.size.to_s.rjust(ShortFormatter::FIXED_SPACE_SIZE),
         time_stamp: current_dir_item.time_stamp,
-        name: current_dir_item.file
+        name: current_dir_item.file_name
       }
     end
   end
