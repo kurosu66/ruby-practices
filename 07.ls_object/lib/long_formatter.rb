@@ -13,7 +13,7 @@ class LongFormatter
 
   def build_long_option_files(current_dir_items)
     long_option_files = {}
-    long_option_files[:total_block] = FileDetail.calculate_total_blocks(current_dir_items)
+    long_option_files[:total_block] = Directory.calculate_total_blocks(current_dir_items)
     long_option_files[:files_long_option] = build_file_info_list(current_dir_items)
     long_option_files
   end

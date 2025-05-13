@@ -29,10 +29,6 @@ class FileDetail
     @stat = File.lstat(file_name)
   end
 
-  def self.calculate_total_blocks(current_dir_items)
-    current_dir_items.sum(&:lstat_blocks)
-  end
-
   def nlink
     @stat.nlink
   end

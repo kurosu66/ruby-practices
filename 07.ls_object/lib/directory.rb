@@ -17,6 +17,10 @@ class Directory
     end
   end
 
+  def self.calculate_total_blocks(current_dir_items)
+    current_dir_items.sum(&:lstat_blocks)
+  end
+
   private
 
   def fetch_file_details(include_hidden_files, is_reverse)
