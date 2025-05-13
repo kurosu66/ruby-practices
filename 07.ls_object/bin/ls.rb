@@ -9,8 +9,11 @@ require_relative '../lib/short_formatter'
 require_relative '../lib/long_formatter'
 
 command_line_option = ARGV.getopts('a', 'r', 'l')
-enabled_options = command_line_option.select {|_key, value| value}
-directory = Directory.new(enabled_options)
+
+include_hidden_files = command_line_option['a']
+is_reverse = command_line_option['r']
+
+directory = Directory.new(include_hidden_files, is_reverse)
 
 lscommand = command_line_option['l'] ? LongFormatter.new : ShortFormatter.new
 lscommand.result(directory)
