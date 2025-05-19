@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+require_relative './formatter_constants'
+
 class ShortFormatter
-  COLUMN_COUNT = 4
-  FIXED_SPACE_SIZE = 4
+  include FormatterConstants
 
   def result(directory)
     files = directory.file_details.map(&:file_name)

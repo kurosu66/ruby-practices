@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require_relative '../lib/file_detail'
+require_relative './formatter_constants'
 
 class LongFormatter 
+  include FormatterConstants
+  
   def result(directory)
     current_dir_items = directory.file_details
     total_block_size =  Directory.calculate_total_blocks(current_dir_items)
@@ -20,10 +23,10 @@ class LongFormatter
     current_dir_items.map do |current_dir_item|
       {
         permission: current_dir_item.permission,
-        n_link: current_dir_item.nlink.to_s.rjust(ShortFormatter::FIXED_SPACE_SIZE),
+        n_link: current_dir_item.nlink.to_s.rjust(FIXED_SPACE_SIZE),
         owner: current_dir_item.owner,
         group: current_dir_item.group,
-        size: current_dir_item.size.to_s.rjust(ShortFormatter::FIXED_SPACE_SIZE),
+        size: current_dir_item.size.to_s.rjust(FIXED_SPACE_SIZE),
         time_stamp: current_dir_item.time_stamp,
         name: current_dir_item.file_name
       }
