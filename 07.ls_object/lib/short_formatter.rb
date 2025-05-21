@@ -5,10 +5,14 @@ require_relative './formatter_constants'
 class ShortFormatter
   include FormatterConstants
 
-  def result(directory)
-    files = directory.file_details.map(&:file_name)
+  def initialize(directory)
+    @directory = directory
+  end
+
+  def result
+    files = @directory.file_details.map(&:file_name)
     adjust_to_column_count(files)
-    items_with_spaces = directory.adjust_max_length(files)
+    items_with_spaces = @directory.adjust_max_length(files)
     items = slice_items(files, items_with_spaces)
 
     puts items.transpose.join

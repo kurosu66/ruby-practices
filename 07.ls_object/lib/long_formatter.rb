@@ -3,21 +3,21 @@
 require_relative '../lib/file_detail'
 require_relative './formatter_constants'
 
-class LongFormatter 
+class LongFormatter
   include FormatterConstants
-  
-  def result(directory)
-    current_dir_items = directory.file_details
+
+  def initialize(directory)
+    @directory = directory
+  end
+
+  def result
+    current_dir_items = @directory.file_details
     total_block_size =  Directory.calculate_total_blocks(current_dir_items)
     detailed_files = build_detailed_files(current_dir_items)
     output(total_block_size, detailed_files)
   end
 
   private
-
-  def fetch_detailed_files(current_dir_items)
-    puts current_dir_items
-  end
 
   def build_detailed_files(current_dir_items)
     current_dir_items.map do |current_dir_item|

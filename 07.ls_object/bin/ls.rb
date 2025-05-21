@@ -15,5 +15,5 @@ is_reverse = command_line_option['r']
 
 directory = Directory.new(include_hidden_files, is_reverse)
 
-lscommand = command_line_option['l'] ? LongFormatter.new : ShortFormatter.new
-lscommand.result(directory)
+lscommand = command_line_option['l'] ? LongFormatter.new(directory) : ShortFormatter.new(directory)
+lscommand.result
