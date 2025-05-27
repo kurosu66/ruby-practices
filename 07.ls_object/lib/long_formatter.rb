@@ -12,7 +12,7 @@ class LongFormatter
 
   def result
     current_dir_items = @directory.file_details
-    total_block_size =  Directory.calculate_total_blocks(current_dir_items)
+    total_block_size =  @directory.calculate_total_blocks(current_dir_items)
     detailed_files = build_detailed_files(current_dir_items)
     output(total_block_size, detailed_files)
   end
