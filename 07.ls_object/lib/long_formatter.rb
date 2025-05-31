@@ -12,7 +12,7 @@ class LongFormatter
   end
 
   def result
-    total_block_size =  @directory.calculate_total_blocks(@current_dir_items)
+    total_block_size = @directory.calculate_total_blocks(@current_dir_items)
     output(total_block_size)
   end
 
