@@ -12,14 +12,7 @@ class LongFormatter
   end
 
   def result
-    total_block_size = @directory.calculate_total_blocks(@current_dir_items)
-    output(total_block_size)
-  end
-
-  private
-
-  def output(total_block_size)
-    puts "total #{total_block_size}"
+    puts "total #{@current_dir_items.sum(&:lstat_blocks)}"
     @current_dir_items.each do |v|
       puts "#{v.permission} #{v.nlink.to_s.rjust(FIXED_SPACE_SIZE)} #{v.owner} #{v.group} #{v.size.to_s.rjust(FIXED_SPACE_SIZE)} #{v.time_stamp} #{v.file_name}"
     end
